@@ -5,7 +5,14 @@ const poem = [
 ];
 
 module.exports = {
-  getRandomAmorousPoem: function () {
-    return poem[Math.floor(Math.random() * poem.length)];
+  createPoemIterator: function () {
+    let currentIndex = 0;
+    return {
+      next: () => {
+        const result = poem[currentIndex];
+        currentIndex = (currentIndex + 1) % poem.length;
+        return result;
+      },
+    };
   },
 };
