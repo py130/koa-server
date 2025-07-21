@@ -4,15 +4,17 @@ const poem = [
   "我在春信里，种下整个宇宙的浪漫等你发现。",
 ];
 
-module.exports = {
-  createPoemIterator: function () {
-    let currentIndex = 0;
-    return {
-      next: () => {
-        const result = poem[currentIndex];
-        currentIndex = (currentIndex + 1) % poem.length;
-        return result;
-      },
-    };
-  },
-};
+exports.createPoemIterator = () => {
+  let currentIndex = 0;
+  return {
+    next: () => {
+      const result = poem[currentIndex];
+      currentIndex = (currentIndex + 1) % poem.length;
+      return result;
+    },
+  };
+}
+
+exports.getAmorousPoemList = () => {
+  return poem.join(';');
+} 

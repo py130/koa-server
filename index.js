@@ -2,6 +2,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const { getRandomJoke } = require("./utils/jokes");
 const { getRandomQuote } = require("./utils/quotes");
+const { createPoemIterator, getAmorousPoemList } = require('./utils/amorous-poem')
 
 const app = new Koa();
 const router = new Router();
@@ -17,10 +18,15 @@ router.get("/quote", (ctx) => {
 });
 
 // 情诗
-const iterator = require("./utils/amorous-poem").createPoemIterator();
+const iterator = createPoemIterator();
 router.get("/amorous-poem", (ctx) => {
   ctx.body = iterator.next();
 });
+
+// 获取情诗列表
+router.get("/amorous-poem-list", (ctx) => {
+  ctx.body = getAmorousPoemList();
+})
 
 // 主页路由
 router.get("/", (ctx) => {
